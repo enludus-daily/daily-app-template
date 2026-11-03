@@ -1,0 +1,22 @@
+# workflow_dispatch だけ（pull_request から秘密に届かないようにする）。テンプレート自身では動かさない。
+name: TestFlight
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: testflight
+  cancel-in-progress: false
+jobs:
+  testflight:
+    if: github.repository != 'enludus-daily/daily-app-template'
+    uses: enludus-daily/daily-actions/.github/workflows/ios-testflight.yml@v1
+    with:
+      scheme: DailyApp
+      team-id: ${{ vars.APPLE_TEAM_ID }}
+      guard-disabled: ${{ vars.DAILY_GUARD_DISABLED == 'true' && 'true' || 'false' }}
+    secrets:
+      ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+      ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+      ASC_P8: ${{ secrets.ASC_P8 }}
