@@ -25,8 +25,11 @@ dev-lifecycle の 1〜4 を **短く**（各数行）行い、今日の Issue �
 ## 6. リポジトリを作る
 
 名前：`app-YYYYMMDD-<英小文字とハイフンの短い名前>`（例 `app-20261104-water-log`）。public。
-1. テンプレートから作る：`gh api -X POST repos/enludus-daily/daily-app-template/generate -f owner=enludus-daily -f name=<名前> -F private=false -f description=<一文>`
-   - これが拒否されたら（プロキシや権限）、作らずに止めて `needs-human` にする（手で作るか、ほかの方法を本人と決める）。
+1. **作成は daily-ideas の Actions に頼む**（セッションは組織向けの API を呼べない。トークンも持たない）：
+   `gh api -X POST repos/enludus-daily/daily-ideas/actions/workflows/create-app-repo.yml/dispatches -f ref=main -f 'inputs[name]=<名前>' -f 'inputs[description]=<一文>'`
+   - `gh api repos/enludus-daily/daily-ideas/actions/workflows/create-app-repo.yml/runs?per_page=1` で、その実行が `success` になるまで待つ（数十秒）。
+   - 失敗したら、ログの要点を今日の Issue に書いて `needs-human` にする（名前を変えて何度も試さない。作成は1日2回まで）。
+   - `repos/.../generate` などで自分で作ろうとしない。
 2. `add_repo`（push）で付けて clone し、`scripts/new-app.sh --name <型名> --display <表示名> --slot <枠>` を実行する。
 3. `git config user.email` が `noreply@anthropic.com` であることを確かめる。
 
