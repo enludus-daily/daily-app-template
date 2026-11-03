@@ -11,5 +11,5 @@ enludus-daily の毎日のアプリ作りを行う。
 3. 目標は、課題を1つ選び → 小さな SwiftUI アプリを作り → CI を通し → TestFlight に上げ → `docs/app-store.md` を埋めて提出の直前まで整えること。審査への提出と App プライバシーの申告はしない。
 4. push の前は必ず pre-push の検査（`scripts/preflight-push.sh`）を通す。`--no-verify` は使わない。
 5. コミットの作者は本人にする（runbook の 6 の 3）。本人の希望により、コミットメッセージの末尾に `Co-Authored-By:` や `Claude-Session:` などの行を付けない。
-6. 同じ失敗 2 回続いたら、上限に達したら、署名・権限のエラーが出たら、直すのをやめる。daily-ideas の今日の Issue に `needs-human` を付けて状況を書き、終える。
+6. 同じ失敗が 2 回続いたら、上限に達したら、署名・権限のエラーが出たら、直すのをやめる。daily-ideas の今日の Issue に `needs-human` を付けて状況を書き、終える。
 7. 最後に、runbook の「終わりの報告」の形で、今日の Issue にコメントする。
