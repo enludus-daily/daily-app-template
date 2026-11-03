@@ -11,8 +11,9 @@ concurrency:
 jobs:
   testflight:
     if: github.repository != 'enludus-daily/daily-app-template'
-    uses: enludus-daily/daily-actions/.github/workflows/ios-testflight.yml@v1
+    uses: enludus-daily/daily-actions/.github/workflows/ios-testflight.yml@1468efb28b9e331f0a64d0903e2ed5baeecd71c3 # daily-actions 2026-11-03
     with:
+      actions-sha: 1468efb28b9e331f0a64d0903e2ed5baeecd71c3
       scheme: DailyApp
       team-id: ${{ vars.APPLE_TEAM_ID }}
       guard-disabled: ${{ vars.DAILY_GUARD_DISABLED == 'true' && 'true' || 'false' }}

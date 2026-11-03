@@ -9,8 +9,9 @@ enludus-daily で毎日作る iOS アプリ（SwiftUI）のテンプレート。
 | `project.yml` | XcodeGen の spec。`.xcodeproj` はコミットしない |
 | `App/Sources/`, `Tests/` | ひな形のアプリとテスト（Swift Testing） |
 | `App/Resources/` | アイコン、アクセントカラー、`PrivacyInfo.xcprivacy` |
-| `.github/workflows/ci.yml` | push / PR で daily-actions@v1 の `ios-ci.yml` を呼ぶ |
+| `.github/workflows/ci.yml` | push / PR で daily-actions の `ios-ci.yml` を呼ぶ（40 桁の SHA で固定） |
 | `.github/workflows/testflight.yml` | 手動（workflow_dispatch）で `ios-testflight.yml` を呼ぶ |
+| `scripts/pin-daily-actions.sh` | daily-actions の SHA を書き換える（整備用のセッションか本人だけ。自己 CI の成功を確かめる） |
 | `scripts/new-app.sh` | 名前・表示名・枠（Bundle ID）に書き換える |
 | `scripts/preflight-push.sh`, `.githooks/pre-push` | push の前の検査（秘密・個人情報）と1日の上限 |
 | `scripts/scan-sensitive.sh` | 検査の複製（正本は daily-actions/scan/。違うと CI が警告） |

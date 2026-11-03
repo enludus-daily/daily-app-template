@@ -6,14 +6,15 @@
 ## スキルの読み替え（このリポジトリでは、ここが優先）
 
 - **Vault（personal-knowledge）は使わない。** セッションに付けない方針。スキルの「Vault を読む・更新する」は飛ばし、報告には「Vault: 対象外（daily のセッションには付けない）」と書く。
-- **個人のリポジトリは付けない。** 付けてよいのは enludus-daily の `daily-ideas`、`daily-app-template`（読むだけ）、その日のアプリのリポジトリだけ。
+- **付けてよいリポジトリは2つだけ：** `enludus-daily/daily-ideas` と、その日のアプリのリポジトリ。個人のリポジトリ・`daily-actions`・`daily-app-template` は付けない（テンプレートは public の `git clone` で読むだけ）。
+- **daily-actions（CI・上限のガード・検査）は直さない。** 直すのは本人が始める整備用のセッションだけ。アプリのワークフローの `@<SHA>` と `actions-sha` も変えない。
 - **dev-lifecycle 4 のあとで本人に戻す、は省く。** 「課題を探して作り、TestFlight まで出す」ことは本人が前もって承認している（2026-11-03）。ただし下の「止まる条件」に当たったら止める。
 - **main への直接 push を許す**（1人で作る毎日のアプリのため）。ただし push の前に必ず `scripts/preflight-push.sh` を通す（pre-push フック）。
 
 ## してはいけないこと
 
 - 審査への提出、App プライバシーの申告、App Store Connect の設定の変更（本人が行う）
-- `git push --no-verify`、フック・検査・上限の無効化、`DAILY_GUARD_DISABLED` などの Variables / Secrets の変更
+- `git push --no-verify`、フック・検査・上限の無効化、ワークフローの daily-actions の SHA の変更やガードを通らない CI の追加、`DAILY_GUARD_DISABLED` などの Variables / Secrets の変更
 - daily-actions・テンプレート・ほかのアプリのリポジトリへの push
 - 秘密情報・個人情報をコード・コミット・Issue・ログに書くこと（作者のメールアドレスは `noreply@anthropic.com` のまま）
 - 外部の依存（SwiftPM のパッケージ）を足すこと。要るなら止めて本人に戻す
@@ -25,8 +26,8 @@
 | | 上限 | どこで守るか |
 |---|---|---|
 | アプリのリポジトリへの push | 1日 10 回 | `scripts/preflight-push.sh`（pre-push フック） |
-| CI の実行 | 1日 12 回、連続 3 回失敗で停止 | daily-actions@v1 の guard |
-| TestFlight へのアップロード | 1日 3 回、連続 2 回失敗で停止 | daily-actions@v1 の guard |
+| CI の実行 | 1日 12 回、連続 3 回失敗で停止 | daily-actions（SHA 固定）の guard |
+| TestFlight へのアップロード | 1日 3 回、連続 2 回失敗で停止 | daily-actions（SHA 固定）の guard |
 | アプリのリポジトリの作成 | 1日 2 回、連続 2 回失敗で停止 | daily-ideas の `create-app-repo.yml`（作成は Actions だけが行う） |
 
 次のどれかに当たったら、**直すのをやめて**、daily-ideas の今日の Issue に `needs-human` を付けて、状況（何を試したか・エラーの要点・次に本人が見るもの）を書いて終える。
@@ -38,7 +39,7 @@
 
 ## ビルドとテスト
 
-Linux のセッションでは Xcode が使えない。ビルドとテストは GitHub Actions（`.github/workflows/ci.yml` → daily-actions@v1）。
+Linux のセッションでは Xcode が使えない。ビルドとテストは GitHub Actions（`.github/workflows/ci.yml` → daily-actions の再利用ワークフロー。40 桁の SHA で固定）。
 - push → CI の結果を `gh api repos/enludus-daily/<repo>/actions/runs` で確かめる。失敗したらログを読んで直す
 - テストは振る舞いを書く（`Tests/`、Swift Testing）。画面から処理を切り離してテストできる形にする
 - 手元でできる確認：`scripts/scan-sensitive.sh .`、`python3 -c "import yaml; yaml.safe_load(open('project.yml'))"`

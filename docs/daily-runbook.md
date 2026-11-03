@@ -5,7 +5,8 @@
 
 ## 0. 準備（10 分以内）
 
-1. `add_repo` で `enludus-daily/daily-ideas`（push）と `enludus-daily/daily-app-template`（読むだけ）を付けて clone する。**Vault や個人のリポジトリは付けない。**
+1. `add_repo` で `enludus-daily/daily-ideas`（push）だけを付けて clone する。テンプレートは付けずに `git clone --depth 1 https://github.com/enludus-daily/daily-app-template` で読む（public）。
+   **Vault・個人のリポジトリ・daily-actions は付けない。** daily-actions（CI・ガード・検査）を直すのは本人が始める整備用のセッションだけ。
 2. `TZ=Asia/Tokyo date +%F` を今日の日付にする。daily-ideas に今日の Issue（ラベル `daily`）がすでにあれば、そこから続ける（二重に作らない）。
 3. daily-ideas に今日の Issue を作る：タイトル `YYYY-MM-DD: （作るものが決まったら書き換え）`、ラベル `daily`、`building`。
 
