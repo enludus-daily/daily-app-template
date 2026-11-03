@@ -15,6 +15,10 @@ jobs:
     with:
       actions-sha: e23391162260978caef6fa1025d92e249965c5ca
       scheme: DailyApp
+      # iPhone Duo の全画面の表示には Xcode 27.1（iOS 27.1 SDK）が要る（Apple Tech Talk「Prepare your app for iPhone Duo」）。
+      # xcode-27 ランナーは GitHub で Preview 扱い（actions/runner-images #14404）。
+      runs-on: xcode-27
+      xcode-version: "27.1"
       team-id: ${{ vars.APPLE_TEAM_ID }}
       guard-disabled: ${{ vars.DAILY_GUARD_DISABLED == 'true' && 'true' || 'false' }}
     secrets:
