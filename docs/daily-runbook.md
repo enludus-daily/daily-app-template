@@ -32,7 +32,8 @@ dev-lifecycle の 1〜4 を **短く**（各数行）行い、今日の Issue �
    - 失敗したら、ログの要点を今日の Issue に書いて `needs-human` にする（名前を変えて何度も試さない。作成は1日2回まで）。
    - `repos/.../generate` などで自分で作ろうとしない。
 2. `add_repo`（push）で付けて clone し、`scripts/new-app.sh --name <型名> --display <表示名> --slot <枠>` を実行する。
-3. `git config user.email` が `noreply@anthropic.com` であることを確かめる。
+3. コミットの作者を本人にする（最初のコミットの作者＝トークンの持ち主＝本人）：
+   `git config user.name "$(git log --reverse --format=%an | head -1)" && git config user.email "$(git log --reverse --format=%ae | head -1)"`
 
 ## 7〜9. 形を作る → 実装 → テスト
 

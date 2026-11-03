@@ -12,8 +12,8 @@ concurrency:
   cancel-in-progress: true
 jobs:
   ci:
-    uses: enludus-daily/daily-actions/.github/workflows/ios-ci.yml@1468efb28b9e331f0a64d0903e2ed5baeecd71c3 # daily-actions 2026-11-03
+    uses: enludus-daily/daily-actions/.github/workflows/ios-ci.yml@e23391162260978caef6fa1025d92e249965c5ca # daily-actions 2026-11-03-owner-author
     with:
-      actions-sha: 1468efb28b9e331f0a64d0903e2ed5baeecd71c3
+      actions-sha: e23391162260978caef6fa1025d92e249965c5ca
       scheme: DailyApp
       guard-disabled: ${{ vars.DAILY_GUARD_DISABLED == 'true' && 'true' || 'false' }}
