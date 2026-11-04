@@ -32,6 +32,13 @@ for f in project.yml App/Sources/*.swift Tests/*.swift .github/workflows/ci.yml 
   sed -i.bak "s/DailyApp/$name/g" "$f"
 done
 find . -name '*.bak' -not -path './.git/*' -delete
+# リポジトリ名と表示名を、提出用の情報・プライバシーポリシーに入れる
+repo=$(basename -s .git "$(git config --get remote.origin.url 2>/dev/null || echo "$root")")
+for f in docs/app-store.json docs/app-store.md PRIVACY.md; do
+  [ -f "$f" ] || continue
+  sed -i.bak -e "s|__REPO__|$repo|g" -e "s|__APP_NAME__|$display|g" "$f"
+done
+find . -name '*.bak' -not -path './.git/*' -delete
 git mv App/Sources/DailyAppApp.swift "App/Sources/${name}App.swift"
 git mv Tests/DailyAppTests.swift "Tests/${name}Tests.swift"
 
@@ -39,4 +46,4 @@ git config core.hooksPath .githooks
 chmod +x .githooks/pre-push scripts/*.sh
 
 echo "書き換えました: スキーム $name / Bundle ID $bundle / 表示名 $display"
-echo "次: README.md と docs/app-store.md を、その日のアプリの内容に書き換える"
+echo "次: README.md・docs/app-store.json・docs/app-store.md・PRIVACY.md を、その日のアプリの内容に書き換える"
