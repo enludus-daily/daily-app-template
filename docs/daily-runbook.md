@@ -55,6 +55,21 @@ dev-lifecycle の 1〜4 を **短く**（各数行）行い、今日の Issue �
 - README.md を、その日のアプリの説明に書き換える（何を・だれの・どう使うか・作らなかったもの）。
 - push（pre-push で検査と上限）→ CI を待つ → 失敗はログを読んで直す。**同じ失敗が 2 回で止める。**
 
+## 9.5 見直しのループ（ゴールを下げない。最低 2 周）
+
+ゴールは「**本人が毎日使いたくなる**」。動いた・CI が通った、で終わりにしない。
+1. 主な画面をすべて撮る：アプリは起動引数 `-screenshotScene <名前>` で各画面を開けるようにし（UserDefaults の `screenshotScene` を読む）、`.github/workflows/ci.yml` の `screenshot-scenes` に並べる（例：`launch drill detail compose launch@dark`）。CI の artifact `screenshots` を開いて自分の目で見る。
+2. 厳しく見て、弱い所を 5 つ以上書き出す：見た目（個性・余白・色・文字の大きさ・ダークモード）、最初の 10 秒、毎日開く理由、手応え（動き・振動・音）、飽きないか、Duo の内側の画面。
+3. 大きい順に直し、テストを足し、CI → 撮り直し → 2 に戻る。
+4. 「自分が利用者なら明日も開くか」に、理由を付けて「はい」と言えるまで回す。言えないまま止めるときは、何が足りないかを報告に書く。
+周ごとに、書き出した弱い所と直したことを今日の Issue に短く残す。
+
+## 意見への対応（本人の意見が来たら、そのたびに TestFlight まで）
+
+- 本人の意見は、daily-ideas の Issue（ラベル `feedback`、本文にアプリのリポジトリ名）か、そのアプリのリポジトリの Issue に来る。毎日のセッションは、**新しいアプリを作る前に**、open の `feedback` を古い順に対応する（そのアプリのリポジトリを `add_repo` で付けてよい）。
+- 対応：意見の奥の課題を考える（言われた形だけをなぞらない）→ 直す → 9.5 の見直し → CI → TestFlight（`distribute` で本人に届く）→ 必要なら `asc.yml` で情報を直す → Issue に「何を直したか・ビルド番号・CI と TestFlight の run の URL」を書いて閉じる。
+- 上限（TestFlight 10 回/日）は、意見ごとに出せるように引き上げてある。
+
 ## 10〜11. TestFlight
 
 1. CI が main で通ったら：`gh api -X POST repos/enludus-daily/<repo>/actions/workflows/testflight.yml/dispatches -f ref=main`
@@ -83,7 +98,7 @@ App Store Connect の情報: 入れた/未実施（asc の run の URL）
 本人がすること: App プライバシーの申告、年齢区分、TestFlight での確認、スクリーンショットの確認、審査への提出
 判断: <AI が決めたこと> — <理由>
 未実施: <何を>（<理由>）
-回数: push <n>/10、CI <n>/12、TestFlight <n>/3、App Store Connect <n>/6
+回数: push <n>/40、CI <n>/40、TestFlight <n>/10、App Store Connect <n>/20
 Vault: 対象外（daily のセッションには付けない）
 ```
 ラベルを `ready-for-review` か `needs-human` にし、`building` を外す。
