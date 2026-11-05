@@ -20,9 +20,9 @@ concurrency:
 jobs:
   asc:
     if: github.repository != 'enludus-daily/daily-app-template'
-    uses: enludus-daily/daily-actions/.github/workflows/ios-asc.yml@85507dbb0179731d7465efe62f18acdde63d1c81 # daily-actions 2026-11-05-products
+    uses: enludus-daily/daily-actions/.github/workflows/ios-asc.yml@1065caf75ae93254ba41ca35eb0bc8ef0dfe81ba # daily-actions 2026-11-05-fixed-signing-cert
     with:
-      actions-sha: 85507dbb0179731d7465efe62f18acdde63d1c81
+      actions-sha: 1065caf75ae93254ba41ca35eb0bc8ef0dfe81ba
       command: ${{ inputs.command }}
       guard-disabled: ${{ vars.DAILY_GUARD_DISABLED == 'true' && 'true' || 'false' }}
     secrets:
