@@ -1,7 +1,7 @@
 # CLAUDE.md（enludus-daily のアプリ）
 
 このリポジトリは、enludus-daily で毎日1本作る iOS アプリ（SwiftUI）の1つ。**public**。
-手順は `docs/daily-runbook.md`、開発の考え方は `.claude/skills/`（dev-lifecycle / dev-judgment / dev-workflow）。
+手順は `docs/daily-runbook.md`、開発の考え方は `.claude/skills/`（dev-lifecycle / dev-judgment / dev-workflow）、**画面と中身の基準は `app-quality-bar`**（StudyReel・五十音マインスイーパーを測った値。届かなければ完成にしない）。
 
 ## スキルの読み替え（このリポジトリでは、ここが優先）
 

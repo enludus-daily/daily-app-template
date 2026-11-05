@@ -33,4 +33,4 @@ open DailyApp.xcodeproj
 ## 版
 
 - Xcode 27.1（ランナー `xcode-27`。GitHub では Preview 扱い）、iOS 18.0 以降、iPhone だけ（iPhone Duo の内側の画面にも合わせる）、Swift 6
-- スキルの取得元：`naki0227/useful-map` の `claude/trusting-noether-9t0vk8`（commit `f42216e`）。main に入ったら取り直す
+- スキルの取得元：`naki0227/personal-knowledge`（Vault、private）の `templates/repo-bootstrap/.claude/skills/` を、本人の整備用セッションで写す（2026-11-05 に app-quality-bar を追加）
