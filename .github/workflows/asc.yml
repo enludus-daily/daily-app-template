@@ -1,14 +1,15 @@
 # App Store Connect API（手動）。daily-actions の ios-asc.yml を呼ぶ。テンプレート自身では動かさない。
 #   metadata   : docs/app-store.json の名前・説明・カテゴリ・URL などを入れ、提出用のバージョンにビルドを選ぶ（提出はしない）
 #   distribute : いちばん新しいビルドを内部テストのグループに配信する（アップロードはしない）
+#   products   : docs/products.json の App 内課金（買い切り・自動更新サブスク）と価格を作る（提出はしない）
 name: App Store Connect
 on:
   workflow_dispatch:
     inputs:
       command:
-        description: metadata か distribute
+        description: metadata・distribute・products
         type: choice
-        options: [metadata, distribute]
+        options: [metadata, distribute, products]
         default: metadata
 permissions:
   contents: read
@@ -19,9 +20,9 @@ concurrency:
 jobs:
   asc:
     if: github.repository != 'enludus-daily/daily-app-template'
-    uses: enludus-daily/daily-actions/.github/workflows/ios-asc.yml@d6f0ff04abcdbcf5d6ff28bec62485e6a50010ca # daily-actions 2026-11-04-limits-scenes
+    uses: enludus-daily/daily-actions/.github/workflows/ios-asc.yml@85507dbb0179731d7465efe62f18acdde63d1c81 # daily-actions 2026-11-05-products
     with:
-      actions-sha: d6f0ff04abcdbcf5d6ff28bec62485e6a50010ca
+      actions-sha: 85507dbb0179731d7465efe62f18acdde63d1c81
       command: ${{ inputs.command }}
       guard-disabled: ${{ vars.DAILY_GUARD_DISABLED == 'true' && 'true' || 'false' }}
     secrets:
