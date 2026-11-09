@@ -9,6 +9,7 @@
    **Vault・個人のリポジトリ・daily-actions は付けない。** daily-actions（CI・ガード・検査）を直すのは、本人が始める整備用のセッションか、本人がそのセッションで明示的に許したときだけ。
 2. `TZ=Asia/Tokyo date +%F` を今日の日付にする。daily-ideas に今日の Issue（ラベル `daily`）がすでにあれば、そこから続ける（二重に作らない）。
 3. daily-ideas に今日の Issue を作る：タイトル `YYYY-MM-DD: （作るものが決まったら書き換え）`、ラベル `daily`、`building`。
+4. **監督の指示を読む**：daily-ideas の open の `director` ラベルの Issue を全部読む（`gh api 'repos/enludus-daily/daily-ideas/issues?labels=director&state=open'`）。監督は、本人が指揮を任せたセッション（2026-11-09〜）。毎日の結果をレビューし、題材の方向・完成度の注文をここに書く。**この手順書より監督の指示を優先する**（ただし CLAUDE.md の「してはいけないこと」「上限と止まる条件」がいつも最優先）。終わったら、その Issue に今日の Issue へのリンクをコメントする（閉じない。監督が閉じる）。
 
 ## 1〜4. 課題を探して、作るものを決める（30 分以内）
 
