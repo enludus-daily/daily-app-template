@@ -52,7 +52,7 @@
 Linux のセッションでは Xcode が使えない。ビルドとテストは GitHub Actions（`.github/workflows/ci.yml` → daily-actions の再利用ワークフロー。40 桁の SHA で固定）。
 - push → CI の結果を `gh api repos/enludus-daily/<repo>/actions/runs` で確かめる。失敗したらログを読んで直す
 - テストは振る舞いを書く（`Tests/`、Swift Testing）。画面から処理を切り離してテストできる形にする
-- 手元でできる確認：`scripts/scan-sensitive.sh .`、`python3 scripts/tone-check.py`（色のトーン）、`python3 -c "import yaml; yaml.safe_load(open('project.yml'))"`
+- 手元でできる確認：`scripts/scan-sensitive.sh .`、`python3 scripts/tone-check.py`（色のトーン）、`python3 scripts/shot-check.py <screenshots のフォルダ>`（黒い丸・まっ黒な画面）、`python3 -c "import yaml; yaml.safe_load(open('project.yml'))"`
 
 ## 状態の言葉
 
