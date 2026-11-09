@@ -49,6 +49,7 @@ dev-lifecycle の 1〜4 を **短く**（各数行）行い、今日の Issue �
 ## 5. 枠（Bundle ID）を確保する
 
 `daily-ideas/slots.json` で、`status: "free"` の最初の枠を `building` にし、`repo` と `date` を書いて daily-ideas の main に push する。
+**使い回しの枠**（`history` があり、`note` に「使い回す」とある枠）：App Store Connect の App はそのまま使う。名前・サブタイトル・説明などは 12 の `asc.yml` の metadata で新しいアプリのものに上書きし、提出用のバージョンには新しいビルドを選ぶ。前のアプリの App 内課金が残っている枠は、`note` のとおりその商品 ID を新しいアプリの Pro に使い、`products` で名前・説明・価格を更新する（削除は本人だけ）。
 **空きがなければ**：TestFlight はせず、CI でのビルドとテストまでにする。今日の Issue に `needs-human`（「枠を足してほしい」）を付ける。
 
 ## 6. リポジトリを作る
