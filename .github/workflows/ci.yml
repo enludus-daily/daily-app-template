@@ -12,15 +12,17 @@ concurrency:
   cancel-in-progress: true
 jobs:
   ci:
-    uses: enludus-daily/daily-actions/.github/workflows/ios-ci.yml@610dc0070c3402b161e2d4bc843ed1179b8a91d1 # daily-actions 2026-11-11-demo-display
+    uses: enludus-daily/daily-actions/.github/workflows/ios-ci.yml@0089b1382ab2c662b17e176f68ddedfcf6821266 # daily-actions 2026-11-11-duo-flow
     with:
-      actions-sha: 610dc0070c3402b161e2d4bc843ed1179b8a91d1
+      actions-sha: 0089b1382ab2c662b17e176f68ddedfcf6821266
       scheme: DailyApp
       # iPhone Duo の全画面の表示には Xcode 27.1（iOS 27.1 SDK）が要る（Apple Tech Talk「Prepare your app for iPhone Duo」）。
       # xcode-27 ランナーは GitHub で Preview 扱い（actions/runner-images #14404）。
       runs-on: xcode-27
       xcode-version: "27.1"
       test-destination: "platform=iOS Simulator,name=iPhone Duo,OS=27.1"
+      # 普通の iPhone でもテストする（別のジョブで並行。UI テストの主な流れと、主なボタンが画面の中にあるかの検査。artifact flow-screenshots-extra）
+      extra-test-destination: "platform=iOS Simulator,name=iPhone 17,OS=latest"
       screenshot-device: iPhone Duo
       # 撮る画面（アプリが起動引数 -screenshotScene <名前> で開く画面。@dark でダークモード）。手順書 9.5
       screenshot-scenes: launch launch@en

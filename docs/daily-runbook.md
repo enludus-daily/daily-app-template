@@ -82,8 +82,9 @@ dev-lifecycle の 1〜4 を **短く**（各数行）行い、今日の Issue �
 
 ゴールは「**本人が毎日使いたくなる**」。動いた・CI が通った、で終わりにしない。
 1. 主な画面をすべて撮る：アプリは起動引数 `-screenshotScene <名前>` で各画面を開けるようにし（UserDefaults の `screenshotScene` を読む）、`.github/workflows/ci.yml` の `screenshot-scenes` に並べる（例：`launch drill detail compose launch@dark`）。CI の artifact `screenshots` を開いて自分の目で見る。
-2. `.claude/skills/app-quality-bar/references/review.md` の 10 の観点（トーン・世界観・トークン・手応え・最初の 10 秒・毎日開く理由・状態・中身の量・課金・仕上げ）を 0〜3 で厳しく採点し、点数と理由と `scripts/tone-check.py` の結果を今日の Issue に書く。あわせて Duo の内側の画面も見る。**合計 22 以上・0 が1つもない・トーンと課金は 2 以上**まで、低い観点から直す。
+2. `.claude/skills/app-quality-bar/references/review.md` の 10 の観点（トーン・世界観・トークン・手応え・最初の 10 秒・毎日開く理由・状態・中身の量・課金・仕上げ）を 0〜3 で厳しく採点し、点数と理由と `scripts/tone-check.py` の結果を今日の Issue に書く。Duo の内側の画面は CI では撮れない（シミュレータが閉じた状態で、開く操作がない。2026-11-11 確認）ので、内側の並べ方は size class（regular）で作り、外側・普通の iPhone の画像と `flow-screenshots` で確かめる。**合計 22 以上・0 が1つもない・トーンと課金は 2 以上**まで、低い観点から直す。
 3. 大きい順に直し、テストを足し、CI → 撮り直し → 2 に戻る。
+- **主な流れの自動タップ（UI テスト。2026-11-11）**：主なボタンに `.accessibilityIdentifier("main.<名前>")` を付け、`UITests/MainFlowUITests.swift` の `MainFlow.steps` に主な流れ（`.tap("main.…")`・`.swipeUp`・`.wait(秒)`）を並べる。CI は iPhone Duo と普通の iPhone の両方で、(1) 起動直後と各操作のあとに `main.` の部品が画面の中に収まり押せるかを確かめ（下で切れていると失敗）、(2) 1 操作ごとに全部の画面を撮って artifact `flow-screenshots`（Duo）・`flow-screenshots-extra`（普通の iPhone）に置く。主なボタンは、スクロールしないと見えない位置に置かない（`safeAreaInset(edge: .bottom)` などで画面の中に固定する）。
 4. 採点が基準に届き、「自分が利用者なら明日も開くか」に理由を付けて「はい」と言えるまで回す。届かないまま止めるときは、点数と足りない所を報告に書き、`ready-for-review` にしない。
 周ごとに、書き出した弱い所と直したことを今日の Issue に短く残す。
 

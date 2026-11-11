@@ -10,6 +10,36 @@
           }
         }
       }
+    },
+    "リセット": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reset"
+          }
+        }
+      }
+    },
+    "1 たす": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add 1"
+          }
+        }
+      }
+    },
+    "回数 %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Count %lld"
+          }
+        }
+      }
     }
   },
   "version": "1.0"

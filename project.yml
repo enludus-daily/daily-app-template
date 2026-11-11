@@ -54,13 +54,28 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.enludus.daily.template.tests
         GENERATE_INFOPLIST_FILE: YES
+  # 主な流れのタップと撮影・主なボタンが画面の中にあるかの検査（UITests/MainFlowUITests.swift）
+  DailyAppUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: UITests
+    dependencies:
+      - target: DailyApp
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.enludus.daily.template.uitests
+        GENERATE_INFOPLIST_FILE: YES
+        TEST_TARGET_NAME: DailyApp
 schemes:
   DailyApp:
     build:
       targets:
         DailyApp: all
         DailyAppTests: [test]
+        DailyAppUITests: [test]
     test:
       gatherCoverageData: true
       targets:
         - DailyAppTests
+        - DailyAppUITests

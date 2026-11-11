@@ -40,8 +40,11 @@ struct ContentView: View {
         layout {
             Button("リセット", role: .destructive) { apply { $0.reset() } }
                 .buttonStyle(.bordered)
+                .accessibilityIdentifier("main.reset")
             Button("1 たす") { apply { $0.increment() } }
                 .buttonStyle(.borderedProminent)
+                // 主なボタンには "main." で始まる印を付ける（UI テストが画面の中にあり押せるかを確かめる）
+                .accessibilityIdentifier("main.increment")
         }
         .controlSize(.large)
     }

@@ -28,7 +28,7 @@ bundle="com.enludus.daily.$slot"
 # 表示名だけ先に置き換える（後の DailyApp の一括置換に巻き込まれないように）
 sed -i.bak "s|CFBundleDisplayName: DailyApp|CFBundleDisplayName: \"$display\"|" project.yml
 sed -i.bak "s|com\.enludus\.daily\.template|$bundle|g" project.yml docs/products.json
-for f in project.yml App/Sources/*.swift Tests/*.swift .github/workflows/ci.yml .github/workflows/testflight.yml; do
+for f in project.yml App/Sources/*.swift Tests/*.swift UITests/*.swift .github/workflows/ci.yml .github/workflows/testflight.yml; do
   sed -i.bak "s/DailyApp/$name/g" "$f"
 done
 find . -name '*.bak' -not -path './.git/*' -delete
