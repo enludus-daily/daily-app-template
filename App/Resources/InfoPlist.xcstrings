@@ -7,13 +7,13 @@
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "DailyApp"
+            "value": "__APP_NAME__"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "DailyApp"
+            "value": "__APP_NAME__"
           }
         }
       }

@@ -34,7 +34,7 @@ done
 find . -name '*.bak' -not -path './.git/*' -delete
 # リポジトリ名と表示名を、提出用の情報・プライバシーポリシーに入れる
 repo=$(basename -s .git "$(git config --get remote.origin.url 2>/dev/null || echo "$root")")
-for f in docs/app-store.json docs/app-store.md PRIVACY.md; do
+for f in docs/app-store.json docs/app-store.md PRIVACY.md App/Resources/InfoPlist.xcstrings; do
   [ -f "$f" ] || continue
   sed -i.bak -e "s|__REPO__|$repo|g" -e "s|__APP_NAME__|$display|g" "$f"
 done
@@ -46,4 +46,4 @@ git config core.hooksPath .githooks
 chmod +x .githooks/pre-push scripts/*.sh
 
 echo "書き換えました: スキーム $name / Bundle ID $bundle / 表示名 $display"
-echo "次: README.md・docs/app-store.json・docs/app-store.md・PRIVACY.md を、その日のアプリの内容に書き換える"
+echo "次: README.md・docs/app-store.json・docs/app-store.md・PRIVACY.md を、その日のアプリの内容に書き換える。App/Resources/InfoPlist.xcstrings の英語のアプリ名（en）を英語の名前にする"
