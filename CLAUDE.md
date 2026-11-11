@@ -5,6 +5,7 @@
 
 ## スキルの読み替え（このリポジトリでは、ここが優先）
 
+- **英語に対応する（本人の希望 2026-11-10・11。必ず）**：画面の文字は `App/Resources/Localizable.xcstrings`、アプリ名と許可の説明は `App/Resources/InfoPlist.xcstrings` に日本語と英語を入れる。App Store の情報も `docs/app-store.json` の `en-US` に入れる。英語の画面を CI で撮って確かめる（手順書の「英語に対応する」）。英語の抜けがあるまま完成にしない。
 - **監督の指示（daily-ideas の `director` ラベルの Issue）が、手順書・スキルより優先する**（本人が指揮を任せた。2026-11-09）。下の「してはいけないこと」「上限と止まる条件」はいつも最優先。
 - **Vault（personal-knowledge）は使わない。** セッションに付けない方針。スキルの「Vault を読む・更新する」は飛ばし、報告には「Vault: 対象外（daily のセッションには付けない）」と書く。
 - **付けてよいリポジトリは2つだけ：** `enludus-daily/daily-ideas` と、その日のアプリのリポジトリ。個人のリポジトリ・`daily-actions`・`daily-app-template` は付けない（テンプレートは public の `git clone` で読むだけ）。
