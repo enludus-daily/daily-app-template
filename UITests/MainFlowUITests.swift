@@ -102,15 +102,15 @@ final class MainFlowUITests: XCTestCase {
 
     /// 画面（ウィンドウ）の中に全部が収まり、押せること。下で切れている・ほかの部品の下にあると失敗する
     private func assertOnScreen(_ element: XCUIElement, in app: XCUIApplication, name: String) {
+        // 切り替えの動き（フェードなど）が終わるまで最大 3 秒待ってから判定する。
+        // 2026-11-15：案内→ホームの切り替えの途中で判定して、押せる部品を「押せない」と誤って落とした（ひと駅なぞとき）
+        let hittable = XCTNSPredicateExpectation(predicate: NSPredicate(format: "hittable == true"), object: element)
+        let result = XCTWaiter.wait(for: [hittable], timeout: 3)
         let window = app.windows.firstMatch.frame
         let frame = element.frame
         XCTAssertFalse(frame.isEmpty, "\(name) の大きさが 0 です")
         XCTAssertTrue(window.insetBy(dx: -0.5, dy: -0.5).contains(frame),
                       "\(name) が画面からはみ出しています（部品 \(frame)、画面 \(window)）。スクロールしないと押せない位置に主なボタンを置かない")
-        // 切り替えの動き（フェードなど）が終わるまで最大 3 秒待ってから判定する。
-        // 2026-11-15：案内→ホームの切り替えの途中で判定して、押せる部品を「押せない」と誤って落とした（ひと駅なぞとき）
-        let hittable = XCTNSPredicateExpectation(predicate: NSPredicate(format: "hittable == true"), object: element)
-        let result = XCTWaiter.wait(for: [hittable], timeout: 3)
         XCTAssertEqual(result, .completed, "\(name) が押せません（隠れている・画面の外。3 秒待っても押せない）")
     }
 
