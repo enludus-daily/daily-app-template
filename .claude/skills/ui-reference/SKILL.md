@@ -9,7 +9,7 @@ description: 毎日のアプリの画面を、StudyReel（本人のアプリ）�
 トーン（色・書体・線・影）の数値は `app-quality-bar` の `references/look.md` §0（StudyReel の実測）が正。このスキルは「画面の組み立て・動き・気持ちいい瞬間」を外から借りるためのもの。
 
 ## 1. 毎日、参考のアプリを 2 つ決める（画面を作る前）
-- **1 つは StudyReel**（トーンの基準。`look.md` §0）
+- **1 つは、題材の雰囲気に近い流行りのアプリ・ゲーム**（音ゲーならリズムゲーム、街づくりなら街づくりゲーム、謎解きなら謎解き・駅の案内表示、など）。StudyReel は仕上げの水準（清潔さ・余白）の参考で、色や書体を写さない（本人の希望 2026-11-16：アプリごとに違う見た目に）
 - **もう 1 つは、題材の組み合わせ（`idea-fusion`）に近い、いま流行っているアプリ**。下の表から選ぶか、その日に調べる（App Store のランキング・Editors' Choice・[Apple の Liquid Glass のギャラリー](https://www.macrumors.com/2026/04/06/apple-liquid-glass-design-gallery-update/)・[Screens Design](https://screensdesign.com/) などのスクショ集）
 - 参考にするアプリの画面を実際に見て（スクショ集や App Store のスクショ）、**借りるもの**を 3 つ、具体的に書く：「〈アプリ〉の〈画面〉の〈どこ〉を、うちの〈画面〉の〈どこ〉に」
 
