@@ -111,6 +111,14 @@ dev-lifecycle の 1〜4 を **短く**（各数行）行い、今日の Issue �
    - 名前・サブタイトル・プライバシーポリシー URL・カテゴリ・説明・キーワード・サポート URL・宣伝文を入れ、提出用のバージョンに最新のビルドを選ぶ（提出はしない）。
    - 権限・署名のエラーなら直そうとせず止める。名前が使われていて入らないときは、別の名前にして 1 回だけやり直す。
 
+
+### 名前をそろえる（本人の希望 2026-11-16：「アプリ名とか色々変えたら GitHub とかもそれに合わせて変えておいて」）
+アプリ名（日本語・英語）を決めた・変えたときは、App Store Connect（asc.yml の metadata）に入れたのと同じ名前に、次を全部そろえる。
+- アプリのリポジトリの `README.md` の見出し、`docs/app-store.json`、`App/Resources/InfoPlist.xcstrings` の表示名（ja・en）
+- リポジトリの説明（About）：`gh api -X PATCH repos/enludus-daily/<repo> -f description="<日本語の名前> / <英語の名前>"`（権限がなければ報告に書く）
+- daily-ideas の `slots.json` の `app_name`、今日の Issue のタイトル
+- 使い回しの枠・仮の名前（Enludus Daily 0xx）の App は、必ず本当の名前に上書きしてからそろえる
+
 ## 終わりの報告（今日の Issue にコメント）
 
 ```
