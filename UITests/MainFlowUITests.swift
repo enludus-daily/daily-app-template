@@ -94,14 +94,17 @@ final class MainFlowUITests: XCTestCase {
             // 画面の切り替わり（消えていく側の部品）を拾わないよう、まだあるものだけ確かめる
             guard element.exists else { continue }
             XCTContext.runActivity(named: "\(when)：\(element.identifier)") { _ in
-                assertOnScreen(element, in: app, name: element.identifier)
+                // 並んでいる主なボタンは「画面の中に収まっているか」（下で切れていないか）だけを見る。
+                // 押せるかは、実際に押す操作（perform）で確かめる。2026-11-16：押せるボタンを isHittable が false と誤って返し、
+                // みみ合わせ・ひと駅なぞときの CI が落ち続けた（主な流れのテストでは同じボタンを押せていた）
+                assertOnScreen(element, in: app, name: element.identifier, requireHittable: false)
             }
         }
         return elements.count
     }
 
     /// 画面（ウィンドウ）の中に全部が収まり、押せること。下で切れている・ほかの部品の下にあると失敗する
-    private func assertOnScreen(_ element: XCUIElement, in app: XCUIApplication, name: String) {
+    private func assertOnScreen(_ element: XCUIElement, in app: XCUIApplication, name: String, requireHittable: Bool = true) {
         // 切り替えの動き（フェードなど）が終わるまで最大 3 秒待ってから判定する。
         // 2026-11-15：案内→ホームの切り替えの途中で判定して、押せる部品を「押せない」と誤って落とした（ひと駅なぞとき）
         let hittable = XCTNSPredicateExpectation(predicate: NSPredicate(format: "hittable == true"), object: element)
@@ -111,7 +114,9 @@ final class MainFlowUITests: XCTestCase {
         XCTAssertFalse(frame.isEmpty, "\(name) の大きさが 0 です")
         XCTAssertTrue(window.insetBy(dx: -0.5, dy: -0.5).contains(frame),
                       "\(name) が画面からはみ出しています（部品 \(frame)、画面 \(window)）。スクロールしないと押せない位置に主なボタンを置かない")
-        XCTAssertEqual(result, .completed, "\(name) が押せません（隠れている・画面の外。3 秒待っても押せない）")
+        if requireHittable {
+            XCTAssertEqual(result, .completed, "\(name) が押せません（隠れている・画面の外。3 秒待っても押せない）")
+        }
     }
 
     /// 全部の画面（iPhone Duo では外側と内側）を撮って、結果に残す。
