@@ -91,6 +91,8 @@ final class MainFlowUITests: XCTestCase {
         let query = app.descendants(matching: .any).matching(NSPredicate(format: "identifier BEGINSWITH 'main.'"))
         let elements = query.allElementsBoundByIndex
         for element in elements {
+            // 画面の切り替わり（消えていく側の部品）を拾わないよう、まだあるものだけ確かめる
+            guard element.exists else { continue }
             XCTContext.runActivity(named: "\(when)：\(element.identifier)") { _ in
                 assertOnScreen(element, in: app, name: element.identifier)
             }
@@ -105,7 +107,11 @@ final class MainFlowUITests: XCTestCase {
         XCTAssertFalse(frame.isEmpty, "\(name) の大きさが 0 です")
         XCTAssertTrue(window.insetBy(dx: -0.5, dy: -0.5).contains(frame),
                       "\(name) が画面からはみ出しています（部品 \(frame)、画面 \(window)）。スクロールしないと押せない位置に主なボタンを置かない")
-        XCTAssertTrue(element.isHittable, "\(name) が押せません（隠れている・画面の外）")
+        // 切り替えの動き（フェードなど）が終わるまで最大 3 秒待ってから判定する。
+        // 2026-11-15：案内→ホームの切り替えの途中で判定して、押せる部品を「押せない」と誤って落とした（ひと駅なぞとき）
+        let hittable = XCTNSPredicateExpectation(predicate: NSPredicate(format: "hittable == true"), object: element)
+        let result = XCTWaiter.wait(for: [hittable], timeout: 3)
+        XCTAssertEqual(result, .completed, "\(name) が押せません（隠れている・画面の外。3 秒待っても押せない）")
     }
 
     /// 全部の画面（iPhone Duo では外側と内側）を撮って、結果に残す。
