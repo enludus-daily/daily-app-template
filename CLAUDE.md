@@ -34,7 +34,7 @@
 | | 上限 | どこで守るか |
 |---|---|---|
 | アプリのリポジトリへの push | 1日 40 回（セッション全体） | `scripts/preflight-push.sh`（pre-push フック） |
-| CI の実行 | 1日 40 回、連続 3 回失敗で停止 | daily-actions（SHA 固定）の guard |
+| CI の実行 | **上限なし**（本人の判断 2026-11-16：「CI はどれだけ回しても無料なんだから回せばいい」） | — |
 | TestFlight へのアップロード | 1日 10 回、連続 2 回失敗で停止 | daily-actions（SHA 固定）の guard |
 | App Store Connect の設定（asc.yml） | 1日 20 回、連続 3 回失敗で停止 | daily-actions（SHA 固定）の guard |
 | アプリのリポジトリの作成 | 1日 2 回、連続 2 回失敗で停止 | daily-ideas の `create-app-repo.yml`（作成は Actions だけが行う） |
@@ -42,7 +42,7 @@
 上限は 2026-11-04 に本人の判断で引き上げた（本人がアプリごとに意見を出し、そのたびに直して TestFlight に出すため）。
 
 次のどれかに当たったら、**直すのをやめて**、daily-ideas の今日の Issue に `needs-human` を付けて、状況（何を試したか・エラーの要点・次に本人が見るもの）を書いて終える。
-- 同じ失敗（エラーの要点が同じ）が **2 回** 続いた
+- 署名・TestFlight・App Store Connect で、同じ失敗（エラーの要点が同じ）が **2 回** 続いた（**CI のビルドやテストの失敗は止まる条件ではない**。原因を読んで直し、通るまで回す。2026-11-16 本人の判断）
 - 上限に達した（guard の `DAILY_LIMIT` / `CONSECUTIVE_FAILURES`）
 - 署名・証明書・App Store Connect の権限のエラー（`docs/signing.md` は daily-actions にある）
 - 空いている枠（`daily-ideas/slots.json`）がない
