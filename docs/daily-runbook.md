@@ -115,7 +115,7 @@ dev-lifecycle の 1〜4 を **短く**（各数行）行い、今日の Issue �
 ### 名前をそろえる（本人の希望 2026-11-16：「アプリ名とか色々変えたら GitHub とかもそれに合わせて変えておいて」）
 アプリ名（日本語・英語）を決めた・変えたときは、App Store Connect（asc.yml の metadata）に入れたのと同じ名前に、次を全部そろえる。
 - アプリのリポジトリの `README.md` の見出し、`docs/app-store.json`、`App/Resources/InfoPlist.xcstrings` の表示名（ja・en）
-- リポジトリの説明（About）：`gh api -X PATCH repos/enludus-daily/<repo> -f description="<日本語の名前> / <英語の名前>"`（権限がなければ報告に書く）
+- リポジトリの説明（About）はセッションからは変えられない（プロキシが設定の書き込みを断る。2026-11-16 確認）。終わりの報告に「説明にする文：<日本語の名前> / <英語の名前>」と書き、本人が変える
 - daily-ideas の `slots.json` の `app_name`、今日の Issue のタイトル
 - 使い回しの枠・仮の名前（Enludus Daily 0xx）の App は、必ず本当の名前に上書きしてからそろえる
 
