@@ -43,3 +43,9 @@ Duo の外側の画面のスクショで、右上に黒い丸が出たら**ア�
 
 ## 主なボタンが画面の中にあるか（2026-11-11）
 静止画だけでは、主なボタンが画面の下で切れていても気づけなかった（こそうじ暦の「済んだ」、じぶん実験室の「くじを引く」）。主なボタンに `accessibilityIdentifier("main.…")` を付け、`UITests/MainFlowUITests.swift` の `MainFlow.steps` に主な流れを書く。CI の `testMainButtonsAreOnScreenAndHittable` が失敗したら、直してから採点する。採点では `screenshots` に加えて artifact `flow-screenshots`（Duo）・`flow-screenshots-extra`（普通の iPhone）の 1 操作ごとの画像も見る。
+
+## 見えない背景がボタンを覆う（2026-11-16、献立マージャン）
+ボタンが「押しても反応しない」ときは、**ほかの部品の背景が、見えないまま上に重なっていないか**を疑う。献立マージャンでは、伝票の罫線を Rectangle を 40 本並べて背景に描き、背景が伝票より大きくはみ出していた。`.clipped()` は見た目だけを切り、押せる範囲は残るので、見えない背景が下のボタンを全部覆っていた。
+- 背景の模様・罫線・粒は `Canvas` で、部品と同じ大きさに描く
+- 飾りの背景・重ねた絵には `.allowsHitTesting(false)` を付ける
+- UI テストの「主な流れのタップ」で、押しても画面が変わらないときにこれを最初に確かめる
