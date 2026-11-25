@@ -63,6 +63,7 @@ dev-lifecycle の 1〜4 を **短く**（各数行）行い、今日の Issue �
 2. `add_repo`（push）で付けて clone し、`scripts/new-app.sh --name <型名> --display <表示名> --slot <枠>` を実行する。
 3. コミットの作者を本人にする（最初のコミットの作者＝トークンの持ち主＝本人）：
    `git config user.name "$(git log --reverse --format=%an | head -1)" && git config user.email "$(git log --reverse --format=%ae | head -1)"`
+   **daily-ideas の clone にも同じ名前とアドレスを設定する**（slots.json や Issue の記録のコミットも本人の作者にする。2026-11-25 に daily-ideas へ作者が本人でないコミットが入った）。
 
 ## 7〜9. 形を作る → 実装 → テスト
 
